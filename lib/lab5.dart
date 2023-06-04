@@ -74,7 +74,7 @@ class _Lab5ScreenState extends State<Lab5Screen> {
           0.14 * 0.01 * temperatureSensor * pressureSensor);
     }
 
-    double getCorrectionFactor(
+    double getCorrectionValue(
         double heatedStreamDensity, double superHeatedStream) {
       return sqrt(heatedStreamDensity / superHeatedStream);
     }
@@ -96,7 +96,7 @@ class _Lab5ScreenState extends State<Lab5Screen> {
     heatedStreamDensity =
         getHeatedStreamDensity(temperatureSensor, pressureSensor);
     correctionFactor =
-        getCorrectionFactor(heatedStreamDensity, superHeatedStream);
+        getCorrectionValue(heatedStreamDensity, superHeatedStream);
     KacpMaxFlow = getKacpMax(streamParamF);
     spending = getFlowSensor(KacpF, KacpMaxFlow, Fmax, correctionFactor);
   }

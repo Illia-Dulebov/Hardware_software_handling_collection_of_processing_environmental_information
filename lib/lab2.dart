@@ -28,6 +28,13 @@ class PagesWithSubTasks extends StatefulWidget {
   _PagesWithSubTasksState createState() => _PagesWithSubTasksState();
 }
 
+class DataPoint {
+  final double x;
+  final double y;
+
+  DataPoint(this.x, this.y);
+}
+
 class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
   List<double> temperatureValues = [46, 42, 30, 18, 6, 1, 0];
   List<double> pressureValues = [24, 22.5, 15, 6, 2, 0];
@@ -89,6 +96,7 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
       return printResult;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -169,8 +177,8 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
 
     List<double> kx = [];
     for (int i = 0; i < values.length; i++) {
-      List<double> subvalues = values.sublist(0, i + 1);
-      kx.add(calculateKx(subvalues, sigmaXmaxTemp, sigmaXismTemp));
+      List<double> subValues = values.sublist(0, i + 1);
+      kx.add(calculateKx(subValues, sigmaXmaxTemp, sigmaXismTemp));
     }
     kx.sort((a, b) => b.compareTo(a));
     kx.removeLast();
@@ -203,7 +211,7 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
     return ListView(
       padding: const EdgeInsets.all(16.0),
       children: [
-        Center(
+        const Center(
           child: const Text('-- Підзавдання №1 --',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
         ),
@@ -218,8 +226,8 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
         Text('--Mx: ${calculateMathExpectation(pressureValues).toStringAsFixed(2)}--'),
         Text('--Kx(T): ${kxPressure.toStringAsFixed(2)}'),
         const SizedBox(height: 20.0),
-        Center(
-          child: const Text('--Xism -> константа, Xmax -> зростає --',
+        const Center(
+          child: Text('--Xism -> константа, Xmax -> зростає --',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(height: 10.0),
@@ -227,8 +235,8 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
           findKx(temperatureValues, sigmaXmaxTemp, sigmaXismTemp, '+', 'Xmax'),
         ),
         const SizedBox(height: 20.0),
-        Center(
-          child: const Text('--Xism -> константа, Xmax -> спадає --',
+        const Center(
+          child: Text('--Xism -> константа, Xmax -> спадає --',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(height: 10.0),
@@ -242,18 +250,18 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
         const SizedBox(height: 10.0),
         Text(findKx(temperatureValues, sigmaXmaxTemp, sigmaXismTemp, '+', 'Xism')),
         const SizedBox(height: 20.0),
-        Center(
-          child: const Text('--Xmax -> константа, Xism -> спадає --',
+        const Center(
+          child: Text('--Xmax -> константа, Xism -> спадає --',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(height: 10.0),
         Text(findKx(temperatureValues, sigmaXmaxTemp, sigmaXismTemp, '-', 'Xism')),
         const SizedBox(height: 20.0),
-        Center(
-          child: const Text('-- Підзавдання №2 --',
+        const Center(
+          child: Text('-- Підзавдання №2 --',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
         ),
-        Image(image: AssetImage('assets/lab2.PNG')),
+        const Image(image: AssetImage('assets/lab2.PNG')),
         const SizedBox(height: 10.0),
         Text('--Mx -- ${mx.toStringAsFixed(2)}--'),
         Text('--Ds -- ${dx.toStringAsFixed(2)}--'),
@@ -263,12 +271,12 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
         Text('--Δτ -- ${deltaTau.toStringAsFixed(2)}--'),
         const SizedBox(height: 10.0),
         Text('--J0 -- ${j0.toStringAsFixed(2)}--'),
-        Text('--τ0 -- ${tau0.toStringAsFixed(2)}--', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+        Text('--τ0 -- ${tau0.toStringAsFixed(2)}--', style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
         const SizedBox(height: 10.0),
         Text('--Kx(τ0) -- ${kxValue.toStringAsFixed(2)}'),
         const SizedBox(height: 20.0),
-        Center(
-          child: const Text('--Графік кореляційної функції випадкового процесу --',
+        const Center(
+          child: Text('--Графік кореляційної функції випадкового процесу --',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
         ),
         const SizedBox(height: 10.0),
@@ -313,9 +321,3 @@ class _PagesWithSubTasksState extends State<PagesWithSubTasks> {
   }
 }
 
-class DataPoint {
-  final double x;
-  final double y;
-
-  DataPoint(this.x, this.y);
-}

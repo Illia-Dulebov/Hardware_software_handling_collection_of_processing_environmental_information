@@ -33,7 +33,7 @@ class Lab3 extends StatelessWidget {
     return tau * i + timePeriod * tau0;
   }
 
-  double getKx(double t) {
+  double getKxValue(double t) {
     double base = t / tau0;
     double result = math.pow(base.toDouble(), k.toDouble()).toDouble();
     return Dx * (1 - result);
@@ -48,7 +48,7 @@ class Lab3 extends StatelessWidget {
     return Xt;
   }
 
-  double getXtInterpolation(double Kx, double i) {
+  double getXtInterpolation(double KxValue, double i) {
     double Xt = math.exp((-timePeriod + i) * tau / tau) * (Xti - Mx) + Mx;
     if(i == 0) {
       print('--Результат розрахунку стохастичної інтерполяції -- ${Xt}');
@@ -67,7 +67,7 @@ class Lab3 extends StatelessWidget {
   List<double> generateKxArray(List<double> tArray) {
     List<double> KxArray = [];
     for (double t in tArray) {
-      KxArray.add(getKx(t));
+      KxArray.add(getKxValue(t));
     }
     return KxArray;
   }
